@@ -20,6 +20,22 @@ fig = None if len(args)<2 else args[1]
 # avoid to mix possible root logon output
 import ROOT
 d = ROOT.gDirectory
+#
+# if 1rst argument missing: list all CADI lines
+#
+if cadi==None:
+    print "Available CADI lines are "+",".join(sorted(allResults.allResults.keys()))
+    sys.exit(0)
+#
+# if 2nd argument missing: list all results
+#
+if fig==None:
+    figs = [ ]
+    if not cadi in allResults.allResults:
+        print "Unknown CADI line",cadi
+        sys.exit(1)
+    print "Available results for "+cadi+" are "+",".join(sorted(allResults.allResults[cadi].keys()))
+    sys.exit(0)
 
 print "{0:10s} {1:10s}   {2:6s}  {3:6s}".format("CADI","Figure","  m1","  m2")
 for c in sorted(allResults.allResults.keys()):
